@@ -1,0 +1,6 @@
+let c = prompt ("tên")
+let d = prompt ("tuổi")
+let t = prompt ("nghề ?")
+console.log("name:",c)
+console.log("age",d)
+console.log("job?",t)
