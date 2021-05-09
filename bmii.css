@@ -1,0 +1,28 @@
+img{
+    width: 70px;
+    height: 55px;
+    border-radius: 10px;
+}
+.t{
+    width: 420px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 0.2px solid grey;
+    margin: 0 auto;
+    background-color: white;
+    padding-left: 2px;
+}
+button{
+    width: 100px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: royalblue;
+    color: white;
+}
+h2{
+    color: royalblue;
+    font-size: 20px;
+}
