@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator🦼</title>
+    <link rel="stylesheet" type="text/css" href="ccl.css">
+    <script src="ccc.js"></script>
+</head>
+<body>
+    <div class="main">
+        <h2 > -CACULATOR -</h2>
+    </div>
+    <br>
+    <div class="calculator">
+        <div class="calculator__display">0</div>     
+        <div class="calculator__keys">
+            <div>
+                <button class="ac" data-action="clear">AC</button>
+
+                <button  class="ac">+/-</button>
+                
+                <button class="ac">%</button>
+                <button class="key--operator" data-action="add" >+</button>
+            <div>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button class="key--operator" data-action="subtract">-</button>
+            </div>
+            <div>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button class="key--operator" data-action="multiply">&times;</button>
+
+            </div>
+            <div>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button class="key--operator" data-action="divide">÷</button>
+
+            </div>
+            <div>
+                <button class="bbbb">0</button>
+                <button data-action="decimal">.</button>
+                <button class="key--equal" data-action="calculate">=</button>
+            </div>
+        </div>
+    </div>
+    <h4>  ®CREAte by DUNG 🛰 </h4>
+<script>
+    const calculator = document.querySelector('.calculator');
+    const keys = calculator.querySelector('.calculator__keys');
+    const display = document.querySelector('.calculator__display');
+
+
+    keys.addEventListener('click', e =>{
+        if (e.target.matches('button')) {
+            
+            const key = e.target;
+            const action = key.dataset.action;
+            const keyContent = key.textContent;
+            const displayedNum = display.textContent;
+
+
+
+            Array.from(key.parentNode.children)
+                .forEach(k => k.classList.remove('is-depressed'));
+
+
+            if (!action) {
+                console.log('number key!');
+                if (displayedNum === '0' || calculator.dataset.previousKeyType === 'operator') {
+                    display.textContent = keyContent;
+
+
+
+                } else {
+                    display.textContent = displayedNum + keyContent;
+
+
+                }
+                calculator.dataset.previousKeyType = 'number';
+            }
+
+            if (
+                action === 'add' ||
+                action === 'subtract' ||
+                action === 'multiply' ||
+                action === 'divide'
+            ) {
+                console.log('operator key!');
+                key.classList.add('is-depressed');
+                calculator.dataset.previousKeyType = 'operator';
+                calculator.dataset.firstValue = displayedNum;
+                calculator.dataset.operator = action;
+
+
+            }
+
+            if (action === 'decimal') {
+
+                let k =calculator.dataset.previousKeyType;
+                console.log(k);
+                if  (!displayedNum.includes('.') && k!='operator' ){
+                    display.textContent = displayedNum + '.';
+                } else if (k == 'operator') {
+
+                    display.textContent = '0.';
+                }
+                 calculator.dataset.previousKeyType = 'decimal';
+            }
+
+            if (action === 'clear') {
+                console.log('clear key!');
+                display.textContent="0";
+                calculator.dataset.previousKeyType = 'clear';
+            }
+
+            if (action === 'calculate') {
+                console.log('equal key!');
+                const firstValue = calculator.dataset.firstValue;
+                const operator = calculator.dataset.operator;
+                const secondValue = displayedNum;
+
+                if(firstValue!= undefined && operator !=undefined){
+                    display.textContent = calculate(firstValue, operator, secondValue);
+                    calculator.dataset.previousKeyType = 'calculate';
+                }
+
+
+            }
+
+        }
+    });
+
+
+
+    function calculate(firstNum,operator,secondNum){
+        if(operator === 'add'){
+            return parseFloat(firstNum) +parseFloat(secondNum) ;
+        }
+        if(operator === 'subtract'){
+            return parseFloat(firstNum) -parseFloat(secondNum) ;
+        }
+        if(operator === 'multiply'){
+            return parseFloat(firstNum) *parseFloat(secondNum) ;
+        }
+        if(operator === 'divide'){
+            return parseFloat(firstNum) /parseFloat(secondNum) ;
+        }
+    }
+
+
+
+
+           
+</script>        
+    
+</body>
+</html>
